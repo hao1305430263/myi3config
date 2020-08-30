@@ -1,0 +1,668 @@
+; vim:ft=dosini
+
+[config]
+# DPI value for HiDPI screen
+; dpi = 192
+
+# bar position, apply globally
+width = 100%
+height = 3%
+; height = 40
+offset-x = 0%
+offset-y = 0%
+; offset-y = 10
+radius = 0.0
+
+fixed-center = true
+override-redirect = false
+
+# module list:
+# alsa: Display current volume
+# backlight: Display screen brightness
+# date: Display date
+# notify: Notify icon, can customize its binding
+# network-short: Network connect icon, can customize its binding
+# battery: Battery info
+# keyboard: CapsLock indicator
+# mpd: mpd status and controls
+# i3: i3 workspace icons
+# workspace-name: i3 current workspace name, need to be in the format like "1:Home"
+# title: title of the active window
+# network-detail: Download and upload speed 
+# weather: Display openweather info
+# info-hackspeed: Numper of characters clicked per minute
+# daily-poem: Display poem
+# temperature: Display internal temperature
+# memory: Display memory usage
+# cpu: Display cpu usage
+# show-desktop: Display desktop (i3 only)
+
+; # Top modules
+; top-left = i3 title
+; top-center = mpd
+; top-right = keyboard backlight alsa battery network-short date
+
+; # Bottom modules
+; bottom-left = info-hackspeed
+; bottom-center = daily-poem
+; bottom-right = temperature memory cpu
+
+# Top modules
+top-left = i3 title
+top-center = date 
+top-right = memory cpu backlight alsa battery network-short jgmenu
+; top-right = jgmenu
+
+# Bottom modules
+; bottom-left = polybar-windows
+; bottom-center =
+; bottom-right = memory cpu backlight alsa battery network-short
+
+systray-top = right
+; systray-bottom = left
+
+# global style
+line-size = 0
+
+; Values applied to all borders
+; Individual side values can be defined using:
+;   border-{left,top,right,bottom}-size
+;   border-{left,top,right,bottom}-color
+; The top and bottom borders are added to the bar height, so the effective
+; window height is:
+;   height + border-top-size + border-bottom-size
+; Meanwhile the effective window width is defined entirely by the width key and
+; the border is placed within this area. So you effectively only have the
+; following horizontal space on the bar:
+;   width - border-right-size - border-left-size
+; border-size can be defined as pixel value (e.g. 35) or percentage (e.g. 50%),
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in 50% minus 10 pixels. The percentage is relative
+; to the monitor width or height depending on the border direction. 
+border-size = 35
+; border-color = 2
+
+
+
+# Modules configure option
+# the default value in this section should work in most cases,
+# if some of them doesn't suit your environment, you can change
+# it from here.
+# network interface, check by `ip link show`
+interface = wlp59s0
+
+# when the current battery capacity excess this value,
+# the full-capacity format will be displayed.
+battery-full-at = 95
+
+# battery and adapter
+battery-bat = BAT0
+battery-adp = AC
+
+# soundcard setting
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+master-mixer = Master
+
+# mpd service connection setting
+mpd-host = 127.0.0.1
+mpd-port = 6600
+
+thermal-zone = 0
+# Base temperature for where to start the ramp (in degrees celsius)
+base-temperature = 0 
+# Threshold temperature to display warning label (in degrees celsius)
+warn-temperature = 70
+
+# GitHub personal token, generate from https://github.com/settings/tokens/new?scopes=notifications&description=Notifier+for+Polybar
+# where select at least `notifications` option
+github-token = 00ed987a6d7efd532c5b4ca0849c2803228d1b5d
+
+# notify module setting
+notify-click-left = xdotool key control+grave
+
+# network module setting
+network-click-left = i3-msg workspace 2
+
+# i3
+# Only show workspaces defined on the same output as the bar
+#
+# Useful if you want to show monitor specific workspaces
+# on different bars
+#
+# Default: false
+i3-pin-workspaces = false
+
+
+[colors]
+background = #cc222222
+buffer = #3B4252
+foreground = #D8DEE9
+nord6 = #ECEFF4
+nord7 = #8FBCBB
+nord8 = #88C0D0
+nord9 = #81A1C1
+urgent = #BF616A
+warning = #D08770
+notify = #EBCB8B
+success = #A3BE8C
+function = #B48EAD
+
+[bar/nord-top]
+monitor = eDP-1-1
+; monitor = HDMI1
+width = ${config.width}
+height = ${config.height}
+offset-x = ${config.offset-x}
+offset-y = ${config.offset-y}
+; offset-x = 2%
+; offset-y = 2%
+radius = ${config.radius}
+
+fixed-center = ${config.fixed-center}
+; dpi = ${config.dpi}
+
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = ${config.line-size}
+
+padding-left = 0
+padding-right = 0
+
+wm-restack = i3
+override-redirect = ${config.override-redirect}
+
+module-margin = 1
+
+; font-0 = Source Han Sans CN:pixelsize=12;1
+; font-0 = SourceHanSerifCN-Bold:pixelsize=12;1
+font-0 = FontAwesome:pixelsize=12;1
+font-1 = WenQuanYi Micro Hei:size=12;1
+font-2 = NotoSans Nerd Font:size=12;1      
+
+modules-left = ${config.top-left}
+modules-center = ${config.top-center}
+modules-right = ${config.top-right}
+
+tray-position = ${config.systray-top}
+tray-padding = 3
+tray-detached = false
+tray-maxsize = 16
+
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/nord-down]
+; monitor = ${env:MONITOR:eDP1}
+monitor = eDP1
+width = ${config.width}
+height = ${config.height}
+offset-x = ${config.offset-x}
+offset-y = ${config.offset-y}
+radius = ${config.radius}
+
+fixed-center = ${config.fixed-center}
+bottom = true
+; dpi = ${config.dpi}
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = ${config.line-size}
+
+padding = 2
+override-redirect = ${config.override-redirect}
+
+module-margin = 2
+
+; font-0 = Source Han Sans CN:pixelsize=8;1
+; font-1 = FontAwesome5FreeSolid:pixelsize=8;1
+; font-2 = FontAwesome5FreeRegular:pixelsize=8;1
+; font-3 = FontAwesome5Brands:pixelsize=8;1
+; font-4 = WenQuanYiMicroHei:size=8
+; font-0 = NotoSans Nerd Font:size=10;2
+; font-1 = siji:pixelsize=16;1
+; font-2 = NotoSans Nerd Font:size=16;4
+
+modules-left = ${config.bottom-left}
+modules-center = ${config.bottom-center}
+modules-right = ${config.bottom-right}
+
+tray-position = ${config.systray-bottom}
+tray-padding = 3
+tray-detached = false
+tray-maxsize = 22
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+enable-ipc = true
+
+; ----------------------------------------------
+; ----------------------- modle ----------------
+; ----------------------------------------------
+[module/i3]
+type = internal/i3
+
+pin-workspaces = ${config.i3-pin-workspaces}
+
+strip-wsnumbers = true
+
+index-sort = true
+enable-click = true
+enable-scroll = true
+wrapping-scroll = true
+reverse-scroll = true
+
+fuzzy-match = false
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state> <label-mode> 
+
+; icons
+ws-icon-0 = 1:Home;
+ws-icon-1 = 2:Browser;
+ws-icon-2 = 3:Coding;
+ws-icon-3 = 4:Learning;
+ws-icon-4 = 5:Fun;
+ws-icon-5 = 25:Desktop;
+ws-icon-default = 
+
+; color
+; label-focused = 
+label-focused = %index%
+; label-focused-underline = ${colors.nord7}
+; label-focused-underline = ${colors.urgent}
+label-focused-border-size = 3
+label-focused-border-color = ${colors.urgent}
+; label-focused-foreground = ${colors.nord7}
+label-focused-foreground = ${colors.urgent}
+label-focused-padding = 4
+label-focused-font = 1
+
+label-unfocused = %index%
+label-unfocused-foreground = ${colors.nord9}
+label-unfocused-padding = 2
+
+label-urgent = %index%
+label-urgent-foreground = ${colors.urgent}
+label-urgent-background = ${colors.foreground}
+label-urgent-padding = 2
+
+; seperator
+label-separator = |
+label-separator-foreground = ${colors.buffer}
+
+[module/workspace-name]
+type = internal/i3
+strip-wsnumbers = true
+
+format = <label-state>
+
+label-focused = %name%
+label-focused-padding = 2
+label-focused-foreground = ${colors.nord7}
+; label-focused-underline = ${colors.nord7}
+
+label-unfocused = 
+
+label-urgent = %name%
+label-urgent-foreground = ${colors.urgent}
+label-urgent-background = ${colors.foreground}
+label-urgent-padding = 2
+
+[module/title]
+type = internal/xwindow
+format = <label>
+format-foreground = ${colors.nord7}
+# format-underline = ${colors.nord7}
+format-padding = 4
+label = %title%
+label-maxlen = 40
+label-empty = Desktop
+label-font = 1
+
+[module/date]
+type = internal/date
+interval = 1.0
+; See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+date = %H:%M
+
+date-alt = %Y-%m-%d%
+
+format = <label>
+label =  %date%
+label-margin = 1
+; label-underline = ${colors.nord8}
+
+[module/battery]
+type = internal/battery
+
+full-at = ${config.battery-full-at}
+
+battery = ${config.battery-bat}
+adapter = ${config.battery-adp}
+
+format-charging = <animation-charging> <label-charging>
+; format-charging-underline = ${colors.foreground}
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+format-discharging = <ramp-capacity> <label-discharging>
+; format-discharging-underline = ${colors.notify}
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.notify}
+
+label-full = 
+label-full-foreground = ${colors.success}
+; label-full-underline = ${colors.success}
+
+[module/keyboard]
+type = internal/xkeyboard
+
+; List of indicators to ignore
+bufferlist-0 = num lock
+bufferlist-1 = scroll lock
+
+; Format
+format = <label-indicator>
+
+label-indicator-on-capslock =  CL
+label-indicator-on-capslock-foreground = ${colors.warning}
+; label-indicator-on-capslock-underline = ${colors.warning}
+
+; Icons
+layout-icon-default = 
+
+[module/alsa]
+type = internal/alsa
+
+master-soundcard = ${config.master-soundcard}
+speaker-soundcard = ${config.speaker-soundcard}
+headphone-soundcard = ${config.headphone-soundcard}
+
+master-mixer = ${config.master-mixer}
+
+; Format 
+format-volume = <ramp-volume> <label-volume>
+; format-volume-underline = ${colors.function}
+
+label-muted =  muted
+label-muted-foreground = ${colors.urgent}
+; label-muted-underline = ${colors.urgent}
+
+ramp-volume-0 = 
+ramp-volume-0-foreground = ${colors.success}
+ramp-volume-1 = 
+ramp-volume-1-foreground = ${colors.notify}
+ramp-volume-2 = 
+ramp-volume-2-foreground = ${colors.urgent}
+
+ramp-headphones-0 = 
+
+ramp-volume-foreground = ${colors.nord7}
+
+[module/backlight]
+type = internal/xbacklight
+
+; enable-scroll = true
+
+; Format
+format = <ramp> <label>
+; format-underline = ${colors.nord9}
+
+ramp-0 = 
+
+label = %percentage%%
+; label = %{A1:$HOME/.config/polybar/scripts/toggle-redshift.sh:}%percentage%%%{A}
+; label = %{A1:$HOME/.config/polybar/scripts/toggle-redshift.sh:}%percentage%%%{A}
+ramp-foreground = ${colors.nord9}
+
+[module/mpd]
+type = internal/mpd
+
+host = ${config.mpd-host}
+port = ${config.mpd-port}
+
+; Format
+format-online = <toggle> <icon-prev> <label-song> <icon-next> <icon-stop> | <bar-progress> | <icon-repeat> <icon-random>
+format-paused = <toggle> <icon-prev> <label-song> <icon-next> <icon-stop>
+format-stopped =  <toggle>
+
+; label-song-underline = ${colors.nord8}
+label-song = %artist:0:10:...% - %title:0:10:...%
+
+icon-play = 
+icon-play-foreground = ${colors.success}
+icon-play-margin = 1
+icon-pause = 
+icon-pause-foreground = ${colors.warning}
+icon-pause-margin = 1
+icon-stop = 
+icon-stop-foreground = ${colors.urgent}
+icon-stop-margin = 1
+icon-prev = 
+icon-prev-foreground = ${colors.function}
+icon-prev-margin = 1
+icon-next = 
+icon-next-foreground = ${colors.function}
+icon-next-margin = 1
+icon-repeat = 
+icon-repeat-margin = 1
+icon-random = 
+icon-random-margin = 1
+
+toggle-on-foreground = ${colors.success}
+toggle-off-foreground = ${colors.urgent}
+
+bar-progress-width = 20
+bar-progress-indicator = |
+bar-progress-fill = -
+bar-progress-empty = -
+bar-progress-gradient = true
+bar-progress-foreground-0 = ${colors.nord7}
+bar-progress-foreground-1 = ${colors.nord8}
+bar-progress-foreground-2 = ${colors.nord9}
+
+[module/notify]
+type = custom/text
+content = 
+content-foreground = ${colors.warning}
+; content-underline = ${colors.warning}
+content-padding = 1
+
+click-left = ${config.notify-click-left}
+
+[module/network-short]
+type = internal/network
+interface = wlp5s0 
+
+interval = 1
+
+format-connected = %{A1:networkmanager_dmenu:}<ramp-signal> <label-connected>%{A} 
+format-disconnected = %{A1:networkmanager_dmenu:}<label-disconnected>%{A}
+label-connected = %essid% %downspeed:5%
+label-disconnected = 
+label-disconnected-foreground = ${colors.urgent}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+
+ramp-signal-0-foreground = ${colors.urgent}
+; ramp-signal-0-underline = ${colors.urgent}
+
+ramp-signal-1-foreground = ${colors.notify}
+; ramp-signal-1-underline = ${colors.notify}
+
+ramp-signal-2-foreground = ${colors.nord7}
+; ramp-signal-2-underline = ${colors.nord7}
+
+ramp-signal-3-foreground = ${colors.success}
+; ramp-signal-3-underline = ${colors.success}
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+format = <ramp-load> <label>
+
+ramp-load-0 = 
+ramp-load-0-foreground = ${colors.success}
+
+ramp-load-1 = 
+ramp-load-1-foreground = ${colors.warning}
+
+ramp-load-2 = 
+ramp-load-2-foreground = ${colors.urgent}
+
+[module/show-desktop]
+type = custom/text
+
+content = 
+
+click-left = i3-msg workspace 25:Desktop
+
+[module/memory]
+type = internal/memory
+interval = 3
+
+format = <ramp-used> <label>
+
+label = %gb_used%/%gb_total%
+
+ramp-used-0 = 
+ramp-used-0-foreground = ${colors.success}
+
+ramp-used-1 = 
+ramp-used-1-foreground = ${colors.warning}
+
+ramp-used-2 = 
+ramp-used-2-foreground = ${colors.urgent}
+
+[module/github]
+type= internal/github
+
+token = ${config.github-token}
+
+empty-notifications = false
+interval = 10
+
+label =  %notifications%
+
+[module/daily-poem]
+type = custom/ipc
+
+# replace B25KQR2Z50dxWG2oLX+PfPG5OqP/BG4s with your token from https://v2.jinrishici.com/token.
+hook-0 = ~/.config/polybar/scripts/daily-poem require B25KQR2Z50dxWG2oLX+PfPG5OqP/BG4s ~/.config/polybar/scripts/poem.txt
+hook-1 = ~/.config/polybar/scripts/daily-poem get ~/.config/polybar/scripts/poem.txt plus
+hook-2 = ~/.config/polybar/scripts/daily-poem get ~/.config/polybar/scripts/poem.txt minus
+
+initial = 1
+
+scroll-up = polybar-msg -p %pid% hook daily-poem 2
+scroll-down = polybar-msg -p %pid% hook daily-poem 3
+double-click-left = polybar-msg -p %pid% hook daily-poem 1
+
+format-underline = ${colors.nord7}
+
+[module/network-detail]
+type = internal/network
+interface = ${config.interface}
+
+interval = 3
+
+format-connected = <label-connected>
+
+label-connected =  %downspeed:9%   %upspeed:9%
+label-connected-foreground = ${colors.success}
+
+[module/temperature]
+type = internal/temperature
+
+thermal-zone = ${config.thermal-zone}
+
+base-temperature = ${config.base-temperature}
+
+warn-temperature = ${config.warn-temperature}
+
+; Format
+format = <ramp> <label>
+format-warn = <label-warn>
+format-warn-background = ${colors.foreground}
+
+label-warn =  %temperature-c%
+label-warn-padding = 1
+label-warn-foreground = ${colors.urgent}
+label-warn-background = ${colors.foreground}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+
+
+ramp-0-foreground = ${colors.nord8}
+ramp-1-foreground = ${colors.nord8}
+ramp-2-foreground = ${colors.success}
+ramp-3-foreground = ${colors.success}
+ramp-4-foreground = ${colors.warning}
+
+[module/info-hackspeed]
+type = custom/script
+exec = ~/.config/polybar/scripts/info-hackspeed.sh
+tail = true
+
+; [module/weather]
+; type = custom/script
+; exec = ~/.config/polybar/scripts/openweathermap-fullfeatured.sh
+; interval = 600
+
+label-font = 4
+
+[module/jgmenu]
+type = custom/text
+content-padding = 2 
+content = 
+click-left = "jgmenu_run >/dev/null 2>&1 &"
+content-font = 1
+
+
+[module/weather]
+type = custom/script
+exec = ~/.config/polybar/scripts/polybar-forecast/polybar-forecast-linux-x86_64
+; exec = ~/.config/polybar/scripts/polybar-forecast
+exec-if = ping openweathermap.org -c 1
+interval = 600
+label-font = 6
+
+[module/i3-windows]
+type = custom/script
+exec = ~/.config/polybar/polybar-i3-windows/module.py
+tail = true
+label-font = 1
+
+[module/polybar-windows]
+type = custom/script
+exec = ~/.config/polybar/scripts/polybar-windows/polybar-windows.sh
+format = <label>
+label = %output%
+label-padding = 1
+interval = 0.1
+label-font = 1

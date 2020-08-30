@@ -1,0 +1,443 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═;   
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #cc222222
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[bar/mb]
+; monitor = ${env:MONITOR:HDMI-1}
+monitor = eDP1
+width = 100%
+height = 26
+;offset-x = 1%
+;offset-y = -2%
+; radius = 8.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+# 下划线的尺寸和颜色
+line-size = 2
+line-color = #f00
+
+# polybar 边界距离屏幕的尺寸
+border-size = 5
+# border-color = #
+
+# polybar 内模块距离边框的尺寸
+padding-left = 0
+padding-right = 2
+
+# polybar 各模块之间的距离
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Source Han Sans CN:pixelsize=12;1
+font-1 = WenQuanYiMicroHei:pixelsize=10;1
+font-2 = Wuncon Siji:pixelsize=12;1
+font-3 = FontAwesome5FreeRegular;pixelsize=10;1
+
+# 各模块位于哪个区域（左，中，右）
+# modules-left = bspwm i3
+modules-left = i3 
+# modules-center = mpd
+modules-center = xwindow
+modules-right = filesystem pulseaudio xkeyboard memory cpu wlan battery temperature date 
+
+local = zh_CN.UTF-8
+
+# ----------------------- 各软件托盘图标设置
+tray-position = right 
+tray-padding = 1
+#tray-background = #000000
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+# ----------------------- 各模块的动作
+# Possible values are:
+# - default   : The default pointer as before, can also be an empty string (default)
+# - pointer   : Typically in the form of a hand
+# - ns-resize : Up and down arrows, can be used to indicate scrolling
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[module/xwindow]
+# This module show the title of the currently focused window.
+# NOTE: Requires a WM that supports the EWMH atom _NET_ACTIVE_WINDOW.
+type = internal/xwindow
+label = %title:0:50:...%
+label-underline = #9f78e1
+label-active-font = 1
+
+[module/xkeyboard]
+# This module shows the current layout and active indicators.
+# 显示键盘大小写，小键盘锁定的模块
+
+type = internal/xkeyboard
+# List of indicators to ignore
+blacklist-0 = num lock
+
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+label-layout = %layout%
+label-layout-underline = ${colors.secondary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+[module/filesystem]
+# This module shows information about mounted filesystems.
+type = internal/fs
+interval = 25
+
+# Mountpoints to display
+mount-0 = /
+
+label-mounted = disk1:%{F#0a81f5}%mountpoint%%{F-} used:%used%,all:%total%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+label-mounted-underline = #f90000
+
+[module/bspwm]
+# This module uses the bspwm ipc client to display information about available monitors, desktops and layout states.
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+#pin-workspaces = true
+
+; This will split the workspace name on ':'
+; Default: false
+# strip-wsnumbers = true
+
+; ws-icon-[0-9]+ = label;icon
+; NOTE: The label needs to match the name of the i3 workspace
+ws-icon-0 = 1
+ws-icon-1 = 2
+ws-icon-2 = 3
+ws-icon-3 = 4
+ws-icon-4 = 5
+ws-icon-default = ♟
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 6 
+label-font = font-3
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+label-active-font = 3
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = ⏮
+icon-stop = ⏹
+icon-play = ⏵
+icon-pause = ⏸
+icon-next = ⏭
+
+; Available tokens:
+;   %artist%
+;   %album-artist%
+;   %album%
+;   %date%
+;   %title%
+; Default: %artist% - %title%
+label-song = 𝄞 %artist% - %title%
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label>
+label = BL:%percentage%%
+
+enable-scroll = false
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+format = <label>
+
+label = BL:%percentage%%
+interval = 3
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format = <label>
+# format-prefix = "CPU: "
+#format-prefix-foreground = ${colors.foreground}
+format-underline = #f90000
+label = CPU:%percentage:2%%
+
+# Spacing between individual per-core ramps
+ramp-coreload-spacing = 1
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █i
+
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "MEMORY:"
+format-prefix-foreground = ${colors.foreground}
+format-underline = #4bffdc
+label = %percentage_used%%
+
+[module/wlan]
+type = internal/network
+interface = wlp5s0
+interval = 3.0
+
+format-connected =  <label-connected>
+format-connected-underline = #9f78e1
+label-connected = %essid% %downspeed:5%
+
+format-disconnected = not connected
+format-disconnected-underline = #9f78e1
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground}
+
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
+
+[module/date]
+type = internal/date
+interval = 1
+
+date =
+date-alt = " %Y-%m-%d"
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix =
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+
+label = %date% %time%
+label-font = font-3
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume>
+format-volume-underline = #9f78e1
+label-volume = VOL %percentage%%
+label-volume-foreground = ${root.foreground}
+
+label-muted = VOL:muted
+label-muted-foreground = #666
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+
+format-charging = bat(charging): <label-charging>
+format-charging-underline = #ffb52a
+
+format-discharging = bat: <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-framerate = 750
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <label>
+format-underline = #f50a4d
+format-warn = <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = settings
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = reboot
+menu-0-1 = power off
+menu-0-1-exec = poweroff
+
+; ---------------------- polybar-script
+[module/info-softwarecounter]
+type = custom/script
+exec = $HOME/.config/polybar/polybar-scripts/polybar-scripts/info-softwarecounter/info-softwarecounter.py
+interval = 1
+label-active-font = 3 
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini

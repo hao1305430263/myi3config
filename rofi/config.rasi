@@ -1,0 +1,9 @@
+configuration {               
+    show-icons: true;         
+	lines: 15;
+	/* font: "DejaVu Sans 18"; */
+	font: "mono 14";
+	drun-icon-theme: "Paper";
+
+}
+/* @import "/usr/share/rofi/themes/Pop-Dark.rasi" */
