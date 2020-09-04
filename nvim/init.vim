@@ -64,12 +64,15 @@ Plug 'yuweijun/vim-space' " vim 中处理空格相关的工具
 Plug 'ianding1/leetcode.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mg979/vim-xtabline'
+Plug 'yuweijun/vim-im'
 
 
 call plug#end()
 
 " let g:pep8_map='F8'
 
+" ---------------------- vimim
+set imsearch=0
 
 
 " ---------------------- majutsushi/tagbar
