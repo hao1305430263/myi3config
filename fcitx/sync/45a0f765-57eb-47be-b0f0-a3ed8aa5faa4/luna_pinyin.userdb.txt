@@ -1,0 +1,34 @@
+# Rime user dictionary
+#@/db_name	luna_pinyin.userdb
+#@/db_type	userdb
+#@/rime_version	1.5.3
+#@/tick	34
+#@/user_id	45a0f765-57eb-47be-b0f0-a3ed8aa5faa4
+bai du 	百度	c=1 d=0.923116 t=34
+biao zhu 	標註	c=1 d=0.932394 t=34
+bu quan 	不全	c=1 d=0.918512 t=34
+bu xiang 	不想	c=1 d=0.985112 t=34
+de 	的	c=5 d=4.55532 t=34
+dong xi 	東西	c=2 d=1.87982 t=34
+dou 	都	c=1 d=0.88692 t=34
+dou shi 	都是	c=1 d=0.951229 t=34
+le 	了	c=1 d=1 t=34
+li 	裏	c=1 d=0.860708 t=34
+li kai 	離開	c=1 d=0.99005 t=34
+mian dui mian 	面對面	c=0 d=0.0865022 t=34
+sa dan 	撒旦	c=1 d=0.847894 t=34
+shi wo 	是我	c=1 d=0.891366 t=34
+suo 	所	c=1 d=0.895834 t=34
+wang pan 	網盤	c=1 d=0.927743 t=34
+wo de 	我的	c=1 d=0.955997 t=34
+wo zai 	我在	c=0 d=0.0970446 t=34
+wo zai ye 	我在也	c=1 d=0.97531 t=34
+xi huan 	喜歡	c=2 d=1.86112 t=34
+ye 	也	c=0 d=0.0970446 t=34
+yi ding 	一定	c=0 d=0.0865022 t=34
+yi ding mian dui mian 	一定面對面	c=1 d=0.869358 t=34
+yi qie 	一切	c=2 d=1.82898 t=34
+zai ye 	再也	c=1 d=0.980199 t=34
+zhe 	這	c=1 d=0.856415 t=34
+zhe li 	這裏	c=4 d=3.65794 t=34
+zi ti 	字體	c=1 d=0.913931 t=34

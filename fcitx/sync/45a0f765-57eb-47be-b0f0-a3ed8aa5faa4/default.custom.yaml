@@ -1,0 +1,15 @@
+patch:
+  schema_list:
+    - schema: double_pinyin_flypy 
+    # - schema: terra_pinyin
+  menu:
+    page_size: 5
+  translator:
+    dictionary: luna_pinyin.sgmain
+  key_binder:
+    bindings:
+      - { when: always, accept: Release+Escape, toggle: ascii_mode}
+      - { when: always, accept: Release+CapsLcok, toggle: ascii_mode}
+      # - { when: always, accept: Release+Control+Space, toggle: ascii_mode}
+      - { when: paging, accept: bracketleft, send: Page_Up }
+      - { when: has_menu, accept: bracketright, send: Page_Down }
