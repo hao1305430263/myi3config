@@ -1,4 +1,6 @@
 # myi3config
+![myi3config](1.png)
+
 i3 config on dell G7 7588
 
 
