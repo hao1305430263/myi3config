@@ -100,6 +100,10 @@ source $ZSH/oh-my-zsh.sh
 alias s="neofetch"
 alias c="clear"
 alias ra="ranger"
+alias steam="steam --proxy-server="socks5://127.0.0.1:1089""
+# alias l="exa -lhHm --git"
+# alias la="exa -lahHm --git"
+
 
 export http_proxy="http://127.0.0.1:8889"
 export https_proxy="http://127.0.0.1:8889"
@@ -123,6 +127,19 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# >>> lazygit >>>
+lg()
+{
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
+# <<< lazygit <<<
 
 
 # export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
@@ -134,3 +151,6 @@ unset __conda_setup
 export CUDA_HOME=/usr/local/cuda
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:"$LD_LIBRARY_PATH:/usr/loacl/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
 export PATH=/usr/local/cuda/bin:$PATH
+
+
+
