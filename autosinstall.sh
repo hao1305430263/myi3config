@@ -19,5 +19,7 @@ sudo add-apt-repository ppa:lazygit-team/release
 sudo apt-get update
 sudo apt-get install lazygit
 
+# autojump
+sudo apt install autojump
 
 sudo apt-get update

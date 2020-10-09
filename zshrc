@@ -104,8 +104,8 @@ alias s="neofetch"
 alias c="clear"
 alias ra="ranger"
 alias steam="steam --proxy-server="socks5://127.0.0.1:1089""
-# alias l="exa -lhHm --git"
-# alias la="exa -lahHm --git"
+alias l="exa -lhHm --git"
+alias la="exa -lahHm --git"
 
 
 export http_proxy="http://127.0.0.1:8889"
@@ -156,4 +156,38 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:"$LD_LIBRARY_PATH:/usr/loacl/cuda/l
 export PATH=/usr/local/cuda/bin:$PATH
 
 
-
+# >>> safe-rm >>>
+alias myrm='trash'  
+alias rl='trashlist'  
+alias ur='undelfile'   
+# 替换rm指令移动文件到~/.trash/中   
+trash()  
+{  
+   mv $@  ~/.trash/  
+}  
+# 显示回收站中垃圾清单  
+trashlist()  
+{  
+   echo -e "\033[32m==== Garbage Lists in ~/.trash/ ====\033[0m"  
+   echo -e "\033[33m----Usage------\033[0m"  
+   echo -e "\033[33m-1- Use 'cleartrash' to clear all garbages in ~/.trash!!!\033[0m"  
+   echo -e "\033[33m-2- Use 'ur' to mv the file in garbages to current dir!!!\033[0m"  
+   ls -al  ~/.trash  
+}  
+# 找回回收站相应文件   
+undelfile()  
+{  
+   mv -i ~/.trash/$@ ./  
+}  
+#清空回收站   
+cleartrash()  
+{  
+   echo -ne "\033[33m!!!Clear all garbages in ~/.trash, Sure?[y/n]\033[0m"  
+   read confirm  
+   if [ $confirm == 'y' -o $confirm == 'Y' ] ;then  
+      /bin/rm -rf ~/.trash/*  
+      /bin/rm -rf ~/.trash/.* 2>/dev/null  
+   fi    
+}
+# <<< safe-rm <<<
+source /opt/ros/noetic/setup.zsh
