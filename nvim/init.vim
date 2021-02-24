@@ -1,11 +1,10 @@
-" __  ____   __  _   ___	 _____ __  __ ____   ____
+
 "|  \/  \ \ / / | \ | \ \   / /_ _|  \/  |  _ \ / ___|
 "| |\/| |\ V /  |  \| |\ \ / / | || |\/| | |_) | |
 "| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___
 "|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
 
 " Author: @haouanbo
-" my name is hao
 " Checkout-list
 " vim-esearch
 " fmoralesc/worldslice
@@ -14,6 +13,15 @@
 " ====================
 " === Editor Setup ===
 " ====================
+
+" ===
+" === 
+" ===
+let g:coc_disable_startup_warning = 1
+" ===
+" === python3
+" ===
+" let g:python3_host_prog = '~/.miniconda3/bin/python'
 
 " ===
 " === System
@@ -25,21 +33,21 @@ set autochdir
 " ===
 " === Editor behavior
 " ===
-set number		 " 显示行号
+set encoding=UTF-8
+set number         " 显示行号
 set relativenumber " 显示相对行号
-set cursorline	 " 高亮当前行
+set cursorline     " 高亮当前行
 set noexpandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set autoindent	 " 代码自动对齐
-set list
-" set listchars=tab:\| ,trail:▫
+set autoindent " 代码自动对齐
+" set list
+" set listchars=tab:\|\ ,trail:▫
+" set listchars=trail:▫
 set nolist
 set scrolloff=4
-set ttimeoutlen=0
-" set notimeout
-" set timeoutlen=500
+set timeoutlen=200
 set viewoptions=cursor,folds,slash,unix
 set wrap
 set tw=0
@@ -53,7 +61,7 @@ set splitbelow
 set noshowmode
 set showcmd
 set wildmenu
-set ignorecase
+set ignorecase " 不区分大小写搜索
 set smartcase
 set shortmess+=c
 set inccommand=split
@@ -102,13 +110,18 @@ let g:terminal_color_12 = '#CAA9FA'
 let g:terminal_color_13 = '#FF92D0'
 let g:terminal_color_14 = '#9AEDFE'
 
+
+" mapleader
+let g:mapleader = "\<space>"
+let g:maplocalleader = ','
+
 " Save & quit
 noremap Q :q<CR>
 noremap <C-q> :qa<CR>
 noremap S :w<CR>
 
 " Open the vimrc file anytime
-noremap <space>rc :e ~/.config/nvim/init.vim<CR>
+nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
 
 " make Y to copy till the end of the line
 nnoremap Y y$
@@ -120,8 +133,6 @@ vnoremap Y "+y
 nnoremap < <<
 nnoremap > >>
 
-" Folding
-" noremap <silent> <LEADER>o za
 
 
 " ===
@@ -150,7 +161,6 @@ noremap <C-j> 5<C-e>
 " ===
 inoremap <C-a> <ESC>A
 
-
 " ===
 " === Command Mode Cursor Movement
 " ===
@@ -175,24 +185,24 @@ noremap = n
 " === Window management
 " ===
 " Use <space> + new arrow keys for moving the cursor around windows
-noremap <space>w <C-w>w
-noremap <space>k <C-w>k
-noremap <space>j <C-w>j
-noremap <space>h <C-w>h
-noremap <space>l <C-w>l
+noremap <leader>w <C-w>w
+noremap <leader>k <C-w>k
+noremap <leader>j <C-w>j
+noremap <leader>h <C-w>h
+noremap <leader>l <C-w>l
 
 " Disable the default s key
 noremap s <nop>
 
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
-noremap <space>sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-noremap <space>sj :set splitbelow<CR>:split<CR>
-noremap <space>sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-noremap <space>sl :set splitright<CR>:vsplit<CR>
+noremap <leader>sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+noremap <leader>sj :set splitbelow<CR>:split<CR>
+noremap <leader>sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+noremap <leader>sl :set splitright<CR>:vsplit<CR>
 
 
 " Press <SPACE> + q to close the window below the current window
-noremap <space>q <C-w>j:q<CR>
+noremap <leader>q <C-w>j:q<CR>
 
 
 " ===
@@ -212,20 +222,22 @@ noremap <leader>tml :+tabmove<CR>
 " === Other useful stuff
 " ===
 " Open a new instance of st with the cwd
-nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
+" nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
+nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'alacritty'<CR><C-\><C-N>:q<CR>
 
 " Move the next character to the end of the line with ctrl+9
 " inoremap <C-u> <ESC>lx$p
 
 " Opening a terminal window
-noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
+" noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
+noremap <localleader>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 " noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 noremap <C+j> <Esc>/<++><CR>:nohlsearch<CR>c4l
 
 " Spelling Check with <space>sc
-noremap <LEADER>sc :set spell!<CR>
+noremap <space>sc :set spell!<CR>
 
 " Press ` to change case (instead of ~)
 noremap ` ~
@@ -251,6 +263,13 @@ inoremap ( ()<esc>i
 inoremap [ []<esc>i
 inoremap { {}<esc>i
 
+
+
+" ===
+" === 环境配置
+" ===
+" let g:python3_host_prog = "~/.conda/envs/py3/bin/python3.6"
+
 " ====================
 " ===   一键运行   ===
 " ====================
@@ -274,12 +293,15 @@ func! CompileRunGcc()
 		:!time bash %
 	elseif &filetype == 'python'
 		set splitbelow
+		" :vsp
 		:sp
 		:term python3 %
+		" :!python3 %
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
 	elseif &filetype == 'markdown'
-		exec "InstantMarkdownPreview"
+		" exec "InstantMarkdownPreview"
+		exec "MarkdownPreview"
 	elseif &filetype == 'tex'
 		silent! exec "VimtexStop"
 		silent! exec "VimtexCompile"
@@ -305,6 +327,8 @@ call plug#begin()
 " themes
 Plug 'morhetz/gruvbox' " gruvbox
 Plug 'ajmwagar/vim-deus' " vim-deus
+Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'pineapplegiant/spaceduck'
 
 " Status line
 Plug 'vim-airline/vim-airline'
@@ -312,42 +336,43 @@ Plug 'ojroques/vim-scrollstatus'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets' " 自动补全的代码块
+" Plug 'SirVer/ultisnips'
 
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'hdima/python-syntax'                             " python-syntax
-Plug 'luochen1990/rainbow'                             " rainbow
-Plug 'junegunn/vim-easy-align'                         " vim-easy-align
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+
+Plug 'vim-python/python-syntax'     " python-syntax
+Plug 'luochen1990/rainbow'     " rainbow
+Plug 'junegunn/vim-easy-align' " vim-easy-align
 Plug 'liuchengxu/vim-which-key'
 Plug 'wakatime/vim-wakatime'
 Plug 'preservim/nerdcommenter'
 Plug 'ap/vim-css-color'
 Plug 'mhinz/vim-startify'
+Plug 'easymotion/vim-easymotion'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'vim-latex/vim-latex'
+Plug 'lervag/vimtex'
 Plug 'hotoo/pangu.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'                " c++ 语言高亮
-Plug 'easymotion/vim-easymotion'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " python 语言高亮
-Plug 'rhysd/vim-clang-format'          " 代码格式化
-Plug 'nathanaelkane/vim-indent-guides' " 显示缩进线
-Plug 'tmhedberg/SimpylFold'            " python 代码折叠
-Plug 'Vimjas/vim-python-pep8-indent'
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " python 语言高亮
+
+" Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'Chiel92/vim-autoformat'
 Plug 'mg979/vim-visual-multi' " 多行输入
-Plug 'yuweijun/vim-im'        " vimim 中文输入法插件
 Plug 'yuweijun/vim-space'     " vim 中处理空格相关的工具
-Plug 'ianding1/leetcode.vim'
 Plug 'majutsushi/tagbar'
-Plug 'mg979/vim-xtabline'
-Plug 'Yggdroot/indentLine'    " 对齐指示线
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'voldikss/vim-translator' " 翻译
+Plug 'ryanoasis/vim-devicons' " vim icon
+
+Plug 'gcmt/wildfire.vim'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 " ====================
@@ -357,9 +382,11 @@ call plug#end()
 if has('termguicolors')
   set termguicolors
 endif
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+ " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme deus
 let g:airline_theme='deus'
+" colorscheme spaceduck
+" let g:airline_theme = 'spaceduck'
 hi NonText ctermfg=gray guifg=grey10
 set background=dark
 highlight Comment cterm=italic gui=italic
@@ -372,83 +399,118 @@ highlight Comment cterm=italic gui=italic
 
 
 " ===
+" === markdown-preview.nvim
+" ===
+let g:mkdp_auto_start = 0 " 不自动开启预览
+let g:mkdp_auto_close = 1 " 关闭 vim 后关闭预览
+let g:mkdp_refresh_slow = 1 " 仅当离开插入模式后才更新预览
+let g:mkdp_command_for_global = 0 " 不开启全局启用预览
+" set to 1, preview server available to others in your network
+" by default, the server listens on localhost (127.0.0.1)
+" default: 0
+let g:mkdp_open_to_the_world = 0
+
+" use custom IP to open preview page
+" useful when you work in remote vim and preview on local browser
+" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
+" default empty
+let g:mkdp_open_ip = ''
+
+" specify browser to open preview page
+" default: ''
+let g:mkdp_browser = ''
+
+" set to 1, echo preview page url in command line when open preview page
+" default is 0
+let g:mkdp_echo_preview_url = 1
+
+" a custom vim function name to open preview page
+" this function will receive url as param
+" default is empty
+let g:mkdp_browserfunc = ''
+
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+
+" use a custom markdown style must be absolute path
+" like '/Users/username/markdown.css' or expand('~/markdown.css')
+let g:mkdp_markdown_css = ''
+
+" use a custom highlight style must absolute path
+" like '/Users/username/highlight.css' or expand('~/highlight.css')
+let g:mkdp_highlight_css = ''
+
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
+
+
+
+
+" ===
+" === vimtex
+" ===
+let g:vimtex_fold_manual=1
+" Prevent that vim detect a file with the tex suffix as a plaintex
+let g:tex_flavor='latex'
+" Set the viewer method
+let g:vimtex_view_method='zathura'
+" 使用 xelatex 作为编译器
+let g:vimtex_compiler_latexmk_engines = {'_':'-xelatex'}
+let g:vimtex_compiler_latexrun_engines ={'_':'xelatex'}
+" Never opened/closed the quickfix window automatically. The quickfix window shows the errors and/or warnings when compile, and we can open the quickfix windows use \le
+let g:vimtex_quickfix_mode=0
+" 最后两行开启自动隐藏功能,开启了这个功能，除了你光标所在的那一行之外，文本里夹杂的 LaTeX 代码就都会隐藏或者替换成其他符号
+" set conceallevel=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+" hi clear Conceal
+" - `neovim-remote` / `nvr` is required for callbacks to work with neovim
+" - Please also set |g:vimtex_compiler_progname| = 'nvr'
+let g:vimtex_compiler_progname='nvr'
+
+" nmap <space>
+
+
+" ===
 " === translator
 " ===
 let g:translator_target_lang='zh'
 " let g:translator_proxy_url = 'https://127.0.0.1:8889'
 let g:translator_window_type='popup'
-nmap <silent> <space>ts <Plug>TranslateW
-vmap <silent> <space>ts <Plug>TranslateW
-
-
-
-" ---------------------- ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-
-" ---------------------- vimim
-set imsearch=0
+nmap <silent> <localleader>t <Plug>TranslateW
+" vmap <silent> <space>t <Plug>TranslateW
 
 
 " ---------------------- majutsushi/tagbar
-" nmap <leader>tt :TagbarToggle<CR>
 nmap <F8> :TagbarToggle<CR>
-
-" ---------------------- nathanaelkane/vim-indent-guides
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=darkgrey
-
-" ---------------------- vim-easymotion
-" nmap s <Plug>(easymotion-s2)
-" s 来搜索单词
-
-
-" ---------------------- vim-conda
-let g:jedi#force_py_version = 2
-let g:UltisnipsUsePythonVersion = 2
-
-" ---------------------- vimim
-let g:vimim_cloud = 'sogou'
-let g:vimim_map = 'tab_as_gi'
-" let g:vimim_mode = 'dynamic'
-" let g:vimim_mycloud = 0
-" " let g:vimim_plugin =
-" let g:vimim_punctuation = 2
-" let g:vimim_shuangpin = 0
-" let g:vimim_toggle = 'pinyin,google,sogou'
 
 
 " ---------------------- sirVer/ultisnips
 " Trigger configuration. 
 " Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsJumpForwardTrigger="<c-b>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" ---------------------- vim-latex
-" required. this makes vim invoke latex-suite when you open a tex file.
-filetype plugin on
- 
-" important: win32 users will need to have 'shellslash' set so that latex can be called correctly.
-" set shellslash
- 
-" important: grep will sometimes skip displaying the file name if you search in a singe file. this will confuse latex-suite. set your grep program to always generate a file-name.
-set grepprg=grep\ -nh\ $*
- 
- " optional: this enables automatic indentation as you type.
-filetype indent on
- 
-" optional: starting with vim 7, the filetype of empty .tex files defaults to 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" the following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
- 
-" this is mostly a matter of taste. but latex looks good with just a bit of indentation.
-set sw=2
- 
-" tip: if you write your \label's as \label{fig:something}, then if you type in \ref{fig: and press you will automatically cycle through all the figure labels. very useful!
-set iskeyword+=:
+
 " ===
 " === vim-table-mode
 " ===
@@ -462,18 +524,11 @@ endfunction
 
 inoreabbrev <expr><bar><bar>
           \ <sid>isatstartofline('\|\|') ?
-          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+             \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
 inoreabbrev <expr> __
           \ <sid>isatstartofline('__') ?
           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 
-" ---------------------- markdown-preview.nvim
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 1
-let g:mkdp_refresh_slow = 0
-let g:mkdp_command_for_global = 0
-let g:mkdp_open_to_the_world = 0
-" let g:mkdp_browser = 'google-chrome-stable'
 
 " ---------------------- nerd commenter 
 " Add spaces after comment delimiters by default
@@ -495,88 +550,6 @@ let g:NERDToggleCheckAllLines = 1
 
 
 " =======================================================
-" ---------------------- vim-which-key
-" =======================================================
-" let's say spc is your leader key and you use it to trigger vim-which-key
-" nnoremap <silent> <leader> :whichkey '<space>'<cr>
-set timeoutlen=500
-
-let g:mapleader = "\<space>"
-let g:maplocalleader = ','
-
-call which_key#register('<Space>', "g:which_key_map")
-nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
-" Define prefix dictionary
-
-let g:which_key_map =  {}
-
-" Second level dictionaries:
-" 'name' is a special field. It will define the name of the group, e.g., leader-f is the "+file" group.
-" Unnamed groups will show a default empty string.
-
-" Create menus based on existing mappings
-" You can pass a descriptive text to an existing mapping.
-
-let g:which_key_map.f = { 'name' : '+file' }
-
-nnoremap <silent> <leader>fs :update<CR>
-let g:which_key_map.f.s = 'save-file'
-
-nnoremap <silent> <leader>fd :e $MYVIMRC<CR>
-let g:which_key_map.f.d = 'open-vimrc'
-
-nnoremap <silent> <leader>oq  :copen<CR>
-nnoremap <silent> <leader>ol  :lopen<CR>
-let g:which_key_map.o = {
-      \ 'name' : '+open',
-      \ 'q' : 'open-quickfix'    ,
-      \ 'l' : 'open-locationlist',
-      \ }
-
-" let g:which_key_map.g = {
-"       \ 'a' : 'vim-easyalign',
-"       \ }
-
-" Create menus not based on existing mappings:
-" Provide commands(ex-command, <Plug>/<C-W>/<C-d> mapping, etc.) and descriptions for existing mappings
-let g:which_key_map.b = {
-      \ 'name' : '+buffer' ,
-      \ '1' : ['b1'        , 'buffer 1']        ,
-      \ '2' : ['b2'        , 'buffer 2']        ,
-      \ 'd' : ['bd'        , 'delete-buffer']   ,
-      \ 'f' : ['bfirst'    , 'first-buffer']    ,
-      \ 'h' : ['Startify'  , 'home-buffer']     ,
-      \ 'l' : ['blast'     , 'last-buffer']     ,
-      \ 'n' : ['bnext'     , 'next-buffer']     ,
-      \ 'p' : ['bprevious' , 'previous-buffer'] ,
-      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
-      \ }
-
-let g:which_key_map.l = {
-      \ 'name' : '+lsp',
-      \ 'f' : ['spacevim#lang#util#Format()'          , 'formatting']       ,
-      \ 'r' : ['spacevim#lang#util#FindReferences()'  , 'references']       ,
-      \ 'R' : ['spacevim#lang#util#Rename()'          , 'rename']           ,
-      \ 's' : ['spacevim#lang#util#DocumentSymbol()'  , 'document-symbol']  ,
-      \ 'S' : ['spacevim#lang#util#WorkspaceSymbol()' , 'workspace-symbol'] ,
-      \ 'g' : {
-        \ 'name': '+goto',
-        \ 'd' : ['spacevim#lang#util#Definition()'     , 'definition']      ,
-        \ 't' : ['spacevim#lang#util#TypeDefinition()' , 'type-definition'] ,
-        \ 'i' : ['spacevim#lang#util#Implementation()' , 'implementation']  ,
-        \ },
-      \ }
-
-" =======================================================
-" ---------------------- vim-easy-align
-" =======================================================
-" start interactive easyalign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" start interactive easyalign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" =======================================================
 " ---------------------- rainbow
 " =======================================================
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :rainbowtoggle
@@ -592,6 +565,8 @@ let g:python_highlight_all = 1
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_folding_disabled = 1 " 禁止折叠
 let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_math = 1 " latex 数学公式支持
+let g:vim_markdown_strikethrough = 1 " 删除线支持
 
 
 " ===
@@ -606,6 +581,12 @@ let g:airline_section_z = airline#section#create([
 			\ '%#__accent_bold#%3v%#__restore__#/%3{virtcol("$") - 1}',
 			\ ])
 
+" ===
+" === ultisnips
+" ===
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " ===
 " === coc.nvim
@@ -628,28 +609,26 @@ set updatetime=300
 set shortmess+=c
 
 let g:coc_global_extensions = [
-	\ 'coc-actions',
 	\ 'coc-css',
 	\ 'coc-diagnostic',
 	\ 'coc-json',
-	\ 'coc-lists',
 	\ 'coc-python',
-	\ 'coc-snippets',
 	\ 'coc-syntax',
 	\ 'coc-tasks',
 	\ 'coc-todolist',
 	\ 'coc-tslint-plugin',
 	\ 'coc-tsserver',
-	\ 'coc-vimlsp',
-	\ 'coc-yaml',
+	\ 'coc-vimtex',
 	\ 'coc-yank']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+	  \ pumvisible() ? "\<C-n>" :
+	  \ <SID>check_back_space() ? "\<TAB>" :
+	  \ coc#refresh()
+
+
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -686,14 +665,14 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 " nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+"
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -702,8 +681,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <localleader>f  <Plug>(coc-format-selected)
+nmap <localleader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -715,13 +694,13 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <localleader>a  <Plug>(coc-codeaction-selected)
+nmap <localleader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <localleader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <localleader>qf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -755,52 +734,22 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <localleader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <localleader>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <localleader>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <localleader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <localleader>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <localleader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <localleader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <localleader>p  :<C-u>CocListResume<CR>
 
-" ===
-" === coc-snippets
-" ===
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? coc#_select_confirm() :
-"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-"
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-"
-" let g:coc_snippet_next = '<tab>'
 
 
 " =======================================================
@@ -808,25 +757,6 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 " =======================================================
 map <leader>n :NERDTreeToggle<cr>
 let NERDTreeShowBookmarks=1 " 显示书签列表
-
-" =======================================================
-" ---------------------- nerdtree-git
-" =======================================================
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
-
-
-
 
 
 " =======================================================
@@ -864,4 +794,43 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 " autocmd filetype markdown inoremap <buffer> ,y >
 
 
+" ===
+" === vim-which-key
+" ===
 
+call which_key#register('<Space>', "g:which_key_map")
+nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+vnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+nnoremap <silent> <C> :<c-u>whichkey  ','<cr>
+
+" Define prefix dictionary
+let g:which_key_map =  {}
+let g:which_key_map.r = { 'name' : '开启其他文件夹' }
+let g:which_key_map.r.c = 'open-my-vimrc'
+
+let g:which_key_map.t = { 'name' : '+file' }
+let g:which_key_map.t = '翻译'
+
+let g:which_key_map.w = '移动光标到下一个窗口'
+let g:which_key_map.h = '移动光标到左侧窗口'
+let g:which_key_map.j = '移动光标到下侧窗口'
+let g:which_key_map.k = '移动光标到上侧窗口'
+let g:which_key_map.l = '移动光标到右侧窗口'
+
+let g:which_key_map.n = '开闭文件栏'
+
+let g:which_key_map.s = { 'name' : '创造新窗口' }
+let g:which_key_map.s.h = '在左侧创造新窗口'
+let g:which_key_map.s.j = '在下侧创造新窗口'
+let g:which_key_map.s.k = '在上侧创造新窗口'
+let g:which_key_map.s.l = '在右侧创造新窗口'
+
+let g:which_key_map.t = { 
+						\ 'name' : '移动tab' }
+let g:which_key_map.t.h = '打开左侧tab'
+let g:which_key_map.t.l = '打开右侧tab'
+let g:which_key_map.t.m = { 'name' : '移动tab' }
+let g:which_key_map.t.m.h = '向左移动tab'
+let g:which_key_map.t.m.l = '向右移动tab'
