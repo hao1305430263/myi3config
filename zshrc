@@ -1,3 +1,64 @@
+# 
+# === QT hidpi
+#
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+
+
+
+#
+# 
+# === ros:
+#
+
+if [[ -r "/opt/ros/melodic/setup.zsh" ]]; then
+	source /opt/ros/melodic/setup.zsh
+fi
+if [[ -r "/home/haouanbo/catkin_ws/devel/setup.zsh" ]]; then
+	source ~/catkin_ws/devel/setup.zsh
+fi
+
+# ===
+# === PATH:
+# ===
+
+# ros on gentoo
+
+# export CMAKE_PREFIX_PATH=/usr
+# export PYTHONPATH=/usr/lib64/python2.7/site-packages/
+# export ROS_DISTRO=kinetic
+# export ROS_ETC_DIR=/usr/etc/ros
+# export ROS_MASTER_URI='http://localhost:11311'
+# export ROS_PACKAGE_PATH=/usr/share/ros_packages
+# export ROS_ROOT=/usr/share/ros
+
+
+# autojump
+if [[ -r "/usr/share/autojump/autojump.zsh" ]]; then
+   source "/usr/share/autojump/autojump.zsh"
+fi
+
+# zsh-syntax-highlighting
+if [[ -r "/usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh" ]]; then
+   source "/usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh"
+fi
+
+
+
+# vim
+export VISUAL=vim
+# MKL 内核配置
+export MKL_DEBUG_CPU_TYPE=5
+
+# GT5 dpi
+# export QT_AUTO_SCREEN_SCALE_FACTOR=0
+# export GDK_SCALE=2
+# export GDK_DPI_SCALE=0.5
+
+# === 
+# === powerlevel10k
+# === 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,113 +66,145 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-# ===
-# === Zinit
-# ===
-
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
-
-# 如果你也是 OMZ 的用户，建议同样加载这些库，能保证体验一致
-zinit snippet OMZ::lib/clipboard.zsh
-zinit snippet OMZ::lib/completion.zsh
-zinit snippet OMZ::lib/history.zsh
-zinit snippet OMZ::lib/key-bindings.zsh
-zinit snippet OMZ::lib/git.zsh
-zinit snippet OMZ::lib/theme-and-appearance.zsh
-### End of Zinit's installer chunk
-# Two regular plugins loaded without investigating.
-# zinit light zsh-users/zsh-autosuggestions
-# zinit light zsh-users/zsh-syntax-highlighting
-zinit light zdharma/fast-syntax-highlighting
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 
-# Plugin history-search-multi-word loaded with investigating.
-zinit load zdharma/history-search-multi-word
-zinit load zsh-users/zsh-autosuggestions
+# === 
+# === ohmyzsh
+# === 
+# Path to your oh-my-zsh installation.
+export ZSH="/home/haouanbo/.oh-my-zsh"
 
-zinit ice depth=1
-zinit light romkatv/powerlevel10k
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# A glance at the new for-syntax – load all of the above
-# plugins with a single command. For more information see:
-# https://zdharma.org/zinit/wiki/For-Syntax/
-zinit for \
-	light-mode  zdharma/fast-syntax-highlighting \
-	light-mode  zsh-users/zsh-autosuggestions \
-	light-mode  zdharma/history-search-multi-word \
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-	# light-mode  zsh-users/zsh-syntax-highlighting \
-# Binary release in archive, from GitHub-releases page.
-# After automatic unpacking it provides program "fzf".
-zinit ice from"gh-r" as"program"
-zinit load junegunn/fzf-bin
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-# One other binary release, it needs renaming from `docker-compose-Linux-x86_64`.
-# This is done by ice-mod `mv'{from} -> {to}'. There are multiple packages per
-# single version, for OS X, Linux and Windows – so ice-mod `bpick' is used to
-# select Linux package – in this case this is actually not needed, Zinit will
-# grep operating system name and architecture automatically when there's no `bpick'.
-zinit ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"
-zinit load docker/compose
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-# Vim repository on GitHub – a typical source code that needs compilation – Zinit
-# can manage it for you if you like, run `./configure` and other `make`, etc. stuff.
-# Ice-mod `pick` selects a binary program to add to $PATH. You could also install the
-# package under the path $ZPFX, see: http://zdharma.org/zinit/wiki/Compiling-programs
-zinit ice as"program" atclone"rm -f src/auto/config.cache; ./configure" \
-    atpull"%atclone" make pick"src/vim"
-zinit light vim/vim
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
-# Scripts that are built at install (there's single default make target, "install",
-# and it constructs scripts by `cat'ing a few files). The make'' ice could also be:
-# `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target.
-zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
-zinit light tj/git-extras
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
 
-# Handle completions without loading any plugin, see "clist" command.
-# This one is to be ran just once, in interactive session.
-# zinit creinstall %HOME/my_completions
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
 
-# ===
-# === Powerlevel10k
-# ===
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+	git
+	# zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
+
+# === 
+# === alias
+# === 
+
+alias l="ls"
+alias la="ls -a"
+alias ll="ls -l"
+
+alias e="exit"
+
 alias s="neofetch"
 alias c="clear"
 alias ra="ranger"
+alias lg="lazygit"
 alias steam="steam --proxy-server="socks5://127.0.0.1:1089""
-alias l="exa -lhHm --git"
-alias la="exa -lahHm --git"
+alias fuping="xrandr --auto --output eDP-1-1 --pos 0x0 --mode 1920x1080 --primary --output HDMI-0 --mode 1920x1080 --right-of eDP-1-1"
+alias fuping1="xrandr --auto --output eDP --pos 0x0 --mode 2880x1800 --primary --output DisplayPort-1 --mode 1920x1080 --scale 1.5x1.5 --right-of eDP"
+alias pycharm="./Downloads/pycharm-community-2020.2.3/bin/pycharm.sh"
 
-export http_proxy="http://127.0.0.1:8889"
-export https_proxy="http://127.0.0.1:8889"
 
-# export http_proxy="http://192.168.31.73:7890"
-# export https_proxy="http://192.168.31.73:7890"
 
+# === 
+# === conda
+# === 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/haouanbo/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -127,74 +220,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# >>> lazygit >>>
-lg()
-{
-    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
-
-    lazygit "$@"
-
-    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
-            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
-            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
-    fi
-}
-# <<< lazygit <<<
-
-
-# export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
-#
-# export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-#
-# export CUDA_HOME=/usr/local/cuda
-# 
-export CUDA_HOME=/usr/local/cuda
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:"$LD_LIBRARY_PATH:/usr/loacl/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
-export PATH=/usr/local/cuda/bin:$PATH
-
-
-# >>> safe-rm >>>
-alias myrm='trash'  
-alias rl='trashlist'  
-alias ur='undelfile'   
-# 替换rm指令移动文件到~/.trash/中   
-trash()  
-{  
-   mv $@  ~/.trash/  
-}  
-# 显示回收站中垃圾清单  
-trashlist()  
-{  
-   echo -e "\033[32m==== Garbage Lists in ~/.trash/ ====\033[0m"  
-   echo -e "\033[33m----Usage------\033[0m"  
-   echo -e "\033[33m-1- Use 'cleartrash' to clear all garbages in ~/.trash!!!\033[0m"  
-   echo -e "\033[33m-2- Use 'ur' to mv the file in garbages to current dir!!!\033[0m"  
-   ls -al  ~/.trash  
-}  
-# 找回回收站相应文件   
-undelfile()  
-{  
-   mv -i ~/.trash/$@ ./  
-}  
-#清空回收站   
-cleartrash()  
-{  
-   echo -ne "\033[33m!!!Clear all garbages in ~/.trash, Sure?[y/n]\033[0m"  
-   read confirm  
-   if [ $confirm == 'y' -o $confirm == 'Y' ] ;then  
-      /bin/rm -rf ~/.trash/*  
-      /bin/rm -rf ~/.trash/.* 2>/dev/null  
-   fi    
-}
-# <<< safe-rm <<<
 # === 
-# === ros
+# === proxy
 # === 
-source /opt/ros/noetic/setup.zsh
-
-
-# === 
-# === autojump
-# === 
-. /usr/share/autojump/autojump.sh
-
+export http_proxy="http://127.0.0.1:8889"
+export https_proxy="http://127.0.0.1:8889"
