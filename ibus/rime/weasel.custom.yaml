@@ -1,7 +1,0 @@
-# weasel.custom.yaml
-
-style:
-  font_point: 40      # 字号
-# horizontal: false   # 横／直排
-# line_spacing: 1     # 行距
-# inline_preedit: true #输入码内嵌

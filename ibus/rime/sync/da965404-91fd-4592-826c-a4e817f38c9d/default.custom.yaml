@@ -1,6 +1,0 @@
-patch:
-  schema_list:
-    - schema: double_pinyin_flypy 
-    # - schema: terra_pinyin
-  "menu/page_size": 9
-  style/color_scheme: dark_temple 
