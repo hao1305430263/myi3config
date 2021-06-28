@@ -1,0 +1,12 @@
+/*
+!.gitignore
+!/nvim/init.vim
+!/nvim/coc-settings.json
+!/nvim/myinit.vim
+!/dunst
+!/i3
+!/i3status
+!/alacritty
+!/dunst
+!/fcitx
+!/vim
