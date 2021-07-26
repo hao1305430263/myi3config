@@ -1,5 +1,10 @@
-q
 shell 
 delete 
+shell pwd
+bulkrename 
 w
-wq
+open_with 0
+open_with 
+
+shell q
+shell nvim README.md

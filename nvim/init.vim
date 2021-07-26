@@ -274,6 +274,7 @@ inoremap { {}<esc>i
 " ===   一键运行   ===
 " ====================
 " Compile function
+noremap R :AsyncStop <CR>
 noremap r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
@@ -292,11 +293,12 @@ func! CompileRunGcc()
 	elseif &filetype == 'sh'
 		:!time bash %
 	elseif &filetype == 'python'
-		set splitbelow
-		" :vsp
-		:sp
-		:term python3 %
-		" :!python3 %
+    :AsyncRun -raw python %
+		" set splitbelow
+		" " :vsp
+		" :sp
+		" :term python3 %
+		" " :!python3 %
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
 	elseif &filetype == 'markdown'
@@ -326,6 +328,7 @@ endfunc
 call plug#begin()
 " themes
 Plug 'morhetz/gruvbox' " gruvbox
+Plug 'rakr/vim-one'
 Plug 'ajmwagar/vim-deus' " vim-deus
 Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug 'pineapplegiant/spaceduck'
@@ -366,7 +369,7 @@ Plug 'mg979/vim-visual-multi' " 多行输入
 Plug 'yuweijun/vim-space'     " vim 中处理空格相关的工具
 Plug 'majutsushi/tagbar'
 " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug 'psliwka/vim-smoothie'
+" Plug 'psliwka/vim-smoothie'
 Plug 'voldikss/vim-translator' " 翻译
 
 " 通过回车键选定大段落
@@ -376,6 +379,7 @@ Plug 'tpope/vim-surround'
 " leader 
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
+Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 
 " ====================
@@ -386,8 +390,8 @@ if has('termguicolors')
   set termguicolors
 endif
  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme deus
-let g:airline_theme='deus'
+colorscheme one
+let g:airline_theme='one'
 " colorscheme spaceduck
 " let g:airline_theme = 'spaceduck'
 hi NonText ctermfg=gray guifg=grey10
@@ -399,6 +403,12 @@ highlight Comment cterm=italic gui=italic
 " ====================
 " ===   插件设置   ===
 " ====================
+
+" ===
+" === asyncrun 
+" ===
+let g:asyncrun_open=6
+
 
 " ===
 " === leaderf

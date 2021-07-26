@@ -51,7 +51,7 @@ floating_modifier $mod
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 bindsym $mod+Return exec alacritty
 # bindsym $mod+Shift+Return exec st
-bindsym $mod+Shift+Return exec st
+bindsym $mod+Shift+Return exec kitty
 # bindsym $mod+Shift+Return exec gnome-terminal
 # bindsym $mod+Return exec st
 # bindsym $mod+Shift+Return exec alacritty

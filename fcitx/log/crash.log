@@ -1,1 +1,18 @@
-fcitx: BadDrawable (invalid Pixmap or Window parameter)
+=========================
+FCITX 4.2.9.6 -- Get Signal No.: 11
+Date: try "date -d @1627278704" if you are using GNU date ***
+ProcessID: 7514
+fcitx(+0x1627)[0x557caaa01627]
+/lib/x86_64-linux-gnu/libc.so.6(+0x3f040)[0x7f6eb7505040]
+/usr/lib/x86_64-linux-gnu/fcitx/fcitx-sunpinyin.so(+0x8e29)[0x7f6ea9faee29]
+/usr/lib/x86_64-linux-gnu/libfcitx-core.so.0(FcitxInstanceProcessKey+0x5f1)[0x7f6eb7f17841]
+/usr/lib/x86_64-linux-gnu/fcitx/fcitx-ipc.so(+0x5f97)[0x7f6ea6f75f97]
+/lib/x86_64-linux-gnu/libdbus-1.so.3(+0x22d80)[0x7f6eb67e6d80]
+/lib/x86_64-linux-gnu/libdbus-1.so.3(dbus_connection_dispatch+0x32a)[0x7f6eb67d7b6a]
+/usr/lib/x86_64-linux-gnu/fcitx/fcitx-dbus.so(+0x2408)[0x7f6eb6a13408]
+/usr/lib/x86_64-linux-gnu/fcitx/fcitx-dbus.so(+0x2523)[0x7f6eb6a13523]
+/usr/lib/x86_64-linux-gnu/libfcitx-core.so.0(+0x8acc)[0x7f6eb7f0aacc]
+/usr/lib/x86_64-linux-gnu/libfcitx-core.so.0(FcitxInstanceRun+0x330)[0x7f6eb7f0b560]
+fcitx(+0xf6c)[0x557caaa00f6c]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7f6eb74e7bf7]
+fcitx(+0xfea)[0x557caaa00fea]
