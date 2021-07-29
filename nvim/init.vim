@@ -21,7 +21,7 @@ let g:coc_disable_startup_warning = 1
 " ===
 " === python3
 " ===
-" let g:python3_host_prog = '~/.miniconda3/bin/python'
+let g:python3_host_prog = '~/.miniconda3/envs/nvim/bin/python3'
 
 " ===
 " === System
@@ -491,7 +491,8 @@ let g:vimtex_fold_manual=1
 " Prevent that vim detect a file with the tex suffix as a plaintex
 let g:tex_flavor='latex'
 " Set the viewer method
-let g:vimtex_view_method='zathura'
+" let g:vimtex_view_method=''
+let g:vimtex_compiler_progname = $HOME.'/miniconda3/envs/nvim/bin/nvr'
 " 使用 xelatex 作为编译器
 let g:vimtex_compiler_latexmk_engines = {'_':'-xelatex'}
 let g:vimtex_compiler_latexrun_engines ={'_':'xelatex'}
@@ -499,8 +500,8 @@ let g:vimtex_compiler_latexrun_engines ={'_':'xelatex'}
 let g:vimtex_quickfix_mode=0
 " 最后两行开启自动隐藏功能,开启了这个功能，除了你光标所在的那一行之外，文本里夹杂的 LaTeX 代码就都会隐藏或者替换成其他符号
 " set conceallevel=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
+" set conceallevel=1
+" let g:tex_conceal='abdmg'
 " hi clear Conceal
 " - `neovim-remote` / `nvr` is required for callbacks to work with neovim
 " - Please also set |g:vimtex_compiler_progname| = 'nvr'

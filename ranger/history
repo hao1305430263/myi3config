@@ -1,10 +1,12 @@
 shell 
-delete 
 shell pwd
-bulkrename 
-w
 open_with 0
-open_with 
-
 shell q
 shell nvim README.md
+bulkrename 
+delete 
+c
+copy 
+
+w
+open_with 

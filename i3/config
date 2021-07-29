@@ -5,7 +5,7 @@ set $mod Mod4
 
 font pango:monospace 12
 
-exec_always --no-startup-id feh --bg-fill $HOME/Pictures/wp9258170-3840x2160-sky-wallpapers.jpg
+exec_always --no-startup-id feh --bg-fill $HOME/Pictures/sunset_sea_sky_landscape_5550x3700.jpg
 
 # exec --no-startup-id xss-lock i3lock-fancy
 # exec --no-startup-id xss-lock slock
@@ -51,7 +51,7 @@ floating_modifier $mod
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 bindsym $mod+Return exec alacritty
 # bindsym $mod+Shift+Return exec st
-bindsym $mod+Shift+Return exec kitty
+bindsym $mod+Shift+Return exec gnome-terminal
 # bindsym $mod+Shift+Return exec gnome-terminal
 # bindsym $mod+Return exec st
 # bindsym $mod+Shift+Return exec alacritty
